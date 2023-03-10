@@ -1,10 +1,10 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using EmpployeeManagement.UI.ViewModels;
-using EmpployeeManagement.UI.Views;
+using EmployeeManagement.UI.ViewModels;
+using EmployeeManagement.UI.Views;
 
-namespace EmpployeeManagement.UI
+namespace EmployeeManagement.UI
 {
     public partial class App : Application
     {

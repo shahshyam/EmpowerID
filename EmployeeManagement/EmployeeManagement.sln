@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33417.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmpployeeManagement.UI", "EmpployeeManagement.UI\EmpployeeManagement.UI.csproj", "{BE06B41B-CCCA-4976-A0DC-EF9E9C053468}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagement.UI", "EmpployeeManagement.UI\EmployeeManagement.UI.csproj", "{BE06B41B-CCCA-4976-A0DC-EF9E9C053468}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagement.Api", "EmployeeManagement.Api\EmployeeManagement.Api.csproj", "{0D1C2B54-2E6A-4E6B-927E-785EE19107DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagement.Api", "EmployeeManagement.Api\EmployeeManagement.Api.csproj", "{0D1C2B54-2E6A-4E6B-927E-785EE19107DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagement.Client", "EmployeeManagement.Client\EmployeeManagement.Client.csproj", "{990E001E-A199-4BC5-A63D-08D02B88DD53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeManagement.Client", "EmployeeManagement.Client\EmployeeManagement.Client.csproj", "{990E001E-A199-4BC5-A63D-08D02B88DD53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagement.Api.Test", "EmployeeManagement.Api.Test\EmployeeManagement.Api.Test.csproj", "{713AD997-A3FD-4A48-A4D4-645C8C033B66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{990E001E-A199-4BC5-A63D-08D02B88DD53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{990E001E-A199-4BC5-A63D-08D02B88DD53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{990E001E-A199-4BC5-A63D-08D02B88DD53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{713AD997-A3FD-4A48-A4D4-645C8C033B66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{713AD997-A3FD-4A48-A4D4-645C8C033B66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{713AD997-A3FD-4A48-A4D4-645C8C033B66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{713AD997-A3FD-4A48-A4D4-645C8C033B66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

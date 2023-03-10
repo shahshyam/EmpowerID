@@ -1,9 +1,9 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using EmpployeeManagement.UI.ViewModels;
+using EmployeeManagement.UI.ViewModels;
 using System;
 
-namespace EmpployeeManagement.UI
+namespace EmployeeManagement.UI
 {
     public class ViewLocator : IDataTemplate
     {

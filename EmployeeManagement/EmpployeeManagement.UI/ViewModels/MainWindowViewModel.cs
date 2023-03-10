@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EmpployeeManagement.UI.ViewModels
+namespace EmployeeManagement.UI.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        public string Greeting => "Welcome to Avalonia!";
+        public string Greeting => "Welcome to Employee Management System!";
     }
 }

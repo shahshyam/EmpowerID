@@ -1,23 +1,30 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:EmpployeeManagement.UI.ViewModels"
+        xmlns:vm="using:EmployeeManagement.UI.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-		Height="650"
-		Width="550"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+		xmlns:local="using:EmployeeManagement.UI.Views"
+		Height="550"
+		Width="750"
 		Title="Employee Management"
 		TransparencyLevelHint="Blur"
 		WindowStartupLocation="CenterScreen"
 		ExtendClientAreaToDecorationsHint="True"
-        x:Class="EmpployeeManagement.UI.Views.MainWindow"
+        x:Class="EmployeeManagement.UI.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
+		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         >
 
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	<Grid Margin="20">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="100"></RowDefinition>
+			<RowDefinition></RowDefinition>
+		</Grid.RowDefinitions>
+		<TextBlock Margin="20" Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
+		<local:EmployeeListView Grid.Row="1"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></local:EmployeeListView>
+	</Grid>
 
 </Window>

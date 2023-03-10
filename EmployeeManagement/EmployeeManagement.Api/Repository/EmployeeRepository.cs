@@ -43,16 +43,10 @@ namespace EmployeeManagement.Api.Repository
 
         public async Task<Employee> UpdateEmployeeAsync(int Id, Employee employee)
         {
-            var oldEmployee = await GetEmployeeAsync(Id);
-            if (oldEmployee == null)
-            {
-                return oldEmployee;
-            }
-
-            _dbContext.Entry(oldEmployee).CurrentValues.SetValues(employee);
+            _dbContext.Entry(employee).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _dbContext.Entry(employee);
             await _dbContext.SaveChangesAsync();
-
-            return oldEmployee;
+            return employee;
         }
     }
 }

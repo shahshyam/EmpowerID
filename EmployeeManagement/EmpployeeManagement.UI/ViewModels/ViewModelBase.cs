@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EmpployeeManagement.UI.ViewModels
+namespace EmployeeManagement.UI.ViewModels
 {
     public class ViewModelBase : ReactiveObject
     {

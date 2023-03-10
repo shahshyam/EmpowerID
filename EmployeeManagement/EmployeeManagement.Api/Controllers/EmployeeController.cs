@@ -8,23 +8,23 @@ namespace EmployeeManagement.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeesController : Controller
+    public class EmployeeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IMapper _mapper;
-        public EmployeesController(IEmployeeRepository employeeRepository, IMapper mapper)
+        public EmployeeController(IEmployeeRepository employeeRepository, IMapper mapper)
         {
             _employeeRepository = employeeRepository;
             _mapper = mapper;
         }
 
-        // GET: api/Employees/
+        // GET: api/Employee/
         [HttpGet]
-        public async Task<IEnumerable<Employee>> GetEmployees()
+        public async Task<IEnumerable<Employee>> GetEmployee()
         {
             return await _employeeRepository.GetAllEmployeeAsync();
         }
-        // GET: api/Employees/5
+        // GET: api/Employee/2
         [HttpGet("{id}")]
         public async Task<IActionResult> GetEmployee([FromRoute] int id)
         {
@@ -62,14 +62,15 @@ namespace EmployeeManagement.Api.Controllers
             {
                 return NotFound($"Employee does not exist with Id:{id}");
             }
-            return Ok(employee);
+            return NoContent();
         }
 
-        // PUT: api/Employees/5
+        // PUT: api/Employees/2
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEmployee([FromRoute] int id, [FromBody] EmployeeDto employeeDto)
+        public async Task<IActionResult> PutEmployee([FromRoute] int id, [FromBody] Employee employee)
         {
-            var employee = _mapper.Map<Employee>(employeeDto);
+            if(employee.Id != id)
+                return BadRequest();
             var updatedEmployee = await _employeeRepository.UpdateEmployeeAsync(id, employee);
             if (updatedEmployee == null)
             {

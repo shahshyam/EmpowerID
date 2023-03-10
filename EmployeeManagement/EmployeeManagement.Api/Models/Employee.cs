@@ -13,6 +13,7 @@ namespace EmployeeManagement.Api.Models
         [Required(ErrorMessage = "Last Name is required")]
         public string LastName { get; set; }
 
+        [Required]
         [EmailAddress(ErrorMessage = "Email is invalid")]
         public string Email { get; set; }   
         
