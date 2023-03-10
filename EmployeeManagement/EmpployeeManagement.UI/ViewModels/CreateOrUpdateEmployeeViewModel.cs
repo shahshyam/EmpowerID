@@ -1,43 +1,39 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Reactive;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using EmployeeManagement.Client;
 using EmployeeManagement.Client.RequestDto;
 using EmployeeManagement.Client.Responses;
-using EmployeeManagement.UI.Models;
 using ReactiveUI;
 
 namespace EmployeeManagement.UI.ViewModels
 {
-	public class CreateOrUpdateEmployeeViewModel : ReactiveObject
+    public class CreateOrUpdateEmployeeViewModel : ReactiveObject
 	{
-        public CreateOrUpdateEmployeeViewModel(EmployeeDetail employeeDetail)
+        public CreateOrUpdateEmployeeViewModel(EmployeeViewModel employeeVm)
         {
-            Title=employeeDetail==null ? "Create Employee" : "Update Employee";
+            Title= employeeVm == null ? "Create Employee" : "Update Employee";
             SaveEmployeeCommand = ReactiveCommand.CreateFromTask(async () =>
             {
-                EmployeeDetail newEmployeDetail = await CreateOrUpdateEmployee(employeeDetail);
-                return newEmployeDetail;
+                EmployeeViewModel newEmployeVM = await CreateOrUpdateEmployee(employeeVm);
+                return newEmployeVM;
             });
 
             CloseCreateOrEditCommand=ReactiveCommand.CreateFromTask(async () =>
             {
-                if (employeeDetail !=null)
+                if (employeeVm !=null)
                 {
-                    employeeDetail = null;
+                    employeeVm = null;
                 }
-                return employeeDetail;
+                return employeeVm;
             });
-            if(employeeDetail != null)
+            if(employeeVm != null)
             {
-               Email=employeeDetail.Email;
-                dateOfBirth=!string.IsNullOrEmpty(employeeDetail.DateofBirth) ? DateTime.Parse(employeeDetail.DateofBirth) : DateTime.Now;
-                Department=employeeDetail.Department;
-                var fullName = employeeDetail.Name.Split(' ');
+               Email=employeeVm.Email;
+                dateOfBirth=!string.IsNullOrEmpty(employeeVm.DateOfBirth) ? DateTime.Parse(employeeVm.DateOfBirth) : DateTime.Now;
+                Department=employeeVm.Department;
+                var fullName = employeeVm.FullName.Split(' ');
                 if(fullName.Length > 1)
                 {
                     FirstName=fullName[0];
@@ -49,9 +45,9 @@ namespace EmployeeManagement.UI.ViewModels
                 }
             }
         }
-        private async Task<EmployeeDetail> CreateOrUpdateEmployee(EmployeeDetail employeeDetail)
+        private async Task<EmployeeViewModel> CreateOrUpdateEmployee(EmployeeViewModel employeVm)
         {
-            if (employeeDetail == null)
+            if (employeVm == null)
             {
                 EmployeeDto employeeDto = new EmployeeDto()
                 {
@@ -64,23 +60,23 @@ namespace EmployeeManagement.UI.ViewModels
                 var response = await EmployeeClient.Instance.CreateEmployeeAsync(employeeDto);
                 if (response != null)
                 {
-                    employeeDetail=new EmployeeDetail()
+                    employeVm =new EmployeeViewModel()
                     {
-                        Name=$"{response.FirstName} {response.LastName}",
+                        FullName=$"{response.FirstName} {response.LastName}",
                         Email=response.Email,
                         Id=response.Id,
                         Department =response.Department,
-                        DateofBirth= response.DateOfBirth.HasValue ? response.DateOfBirth.Value.ToString("d") : string.Empty
+                        DateOfBirth= response.DateOfBirth.HasValue && response.DateOfBirth.Value!=DateTime.MinValue ? response.DateOfBirth.Value.ToString("d") : string.Empty
                     };
                 }
-                return employeeDetail;
+                return employeVm;
             }
             else
             {
                 //updating change here
                 var updateEmployee = new Employee()
                 {
-                    Id=employeeDetail.Id,
+                    Id=employeVm.Id,
                     DateOfBirth=DateOfBirth,
                     Department=Department,
                     Email=this.Email,
@@ -88,17 +84,17 @@ namespace EmployeeManagement.UI.ViewModels
                     LastName=this.LastName
                 };
 
-                var response = await EmployeeClient.Instance.UpdateEmployeeAsync(employeeDetail.Id, updateEmployee);
+                var response = await EmployeeClient.Instance.UpdateEmployeeAsync(employeVm.Id, updateEmployee);
                 if (response != null)
                 {
-                    employeeDetail.Id = response.Id;
-                    employeeDetail.Email = response.Email;
-                    employeeDetail.Department = response.Department;
-                    employeeDetail.Name=$"{response.FirstName} {response.LastName}";
-                    employeeDetail.DateofBirth=response.DateOfBirth.HasValue? response.DateOfBirth.Value.ToString("d") : string.Empty;
+                    employeVm.Id = response.Id;
+                    employeVm.Email = response.Email;
+                    employeVm.Department = response.Department;
+                    employeVm.FullName=$"{response.FirstName} {response.LastName}";
+                    employeVm.DateOfBirth=response.DateOfBirth.HasValue? response.DateOfBirth.Value.ToString("d") : string.Empty;
                 }
             }
-            return employeeDetail;
+            return employeVm;
         }
         private string title;
         public string Title
@@ -142,7 +138,7 @@ namespace EmployeeManagement.UI.ViewModels
             set => this.RaiseAndSetIfChanged(ref dateOfBirth, value);
         }
 
-        public ReactiveCommand<Unit, EmployeeDetail?> SaveEmployeeCommand { get; }
-        public ReactiveCommand<Unit, EmployeeDetail?> CloseCreateOrEditCommand { get; }
+        public ReactiveCommand<Unit, EmployeeViewModel?> SaveEmployeeCommand { get; }
+        public ReactiveCommand<Unit, EmployeeViewModel?> CloseCreateOrEditCommand { get; }
     }
 }

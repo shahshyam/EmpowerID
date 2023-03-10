@@ -1,6 +1,5 @@
 using EmployeeManagement.Client;
 using EmployeeManagement.UI.MessageServices;
-using EmployeeManagement.UI.Models;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
@@ -17,12 +16,12 @@ namespace EmployeeManagement.UI.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         public string Title => "Welcome to Employee Management System!";
-        public ObservableCollection<EmployeeDetail> EmployeeDetailList { get; } = new();
+        public ObservableCollection<EmployeeViewModel> EmployeeDetailList { get; } = new();
         public MainWindowViewModel()
         {
-            ShowDialog = new Interaction<CreateOrUpdateEmployeeViewModel, EmployeeDetail?>();
+            ShowDialog = new Interaction<CreateOrUpdateEmployeeViewModel, EmployeeViewModel?>();
             DeleteEmployeeCommand = ReactiveCommand.Create<int>(id => DeleteEmployee(id));
-            CreateOrUpdateEmployeeCommand = ReactiveCommand.Create<EmployeeDetail>(employee => CreateOrUpdateEmployee(employee));
+            CreateOrUpdateEmployeeCommand = ReactiveCommand.Create<EmployeeViewModel>(employee => CreateOrUpdateEmployee(employee));
            
             RxApp.MainThreadScheduler.Schedule(LoadEmployee);
         }       
@@ -32,11 +31,11 @@ namespace EmployeeManagement.UI.ViewModels
             var employees = await EmployeeClient.Instance.GetEmployeesASync();
             foreach (var employee in employees)
             {
-                string dob = employee.DateOfBirth.HasValue ? employee.DateOfBirth.Value.ToString("d") : string.Empty;
-                EmployeeDetailList.Add(new EmployeeDetail()
+                string dob = employee.DateOfBirth.HasValue && employee.DateOfBirth.Value!=DateTime.MinValue ? employee.DateOfBirth.Value.ToString("d") : string.Empty;
+                EmployeeDetailList.Add(new EmployeeViewModel()
                 {
-                    Name = $"{employee.FirstName} {employee.LastName}",
-                    DateofBirth = dob,
+                    FullName = $"{employee.FirstName} {employee.LastName}",
+                    DateOfBirth = dob,
                     Department = employee.Department,
                     Email = employee.Email,
                     Id = employee.Id
@@ -59,9 +58,9 @@ namespace EmployeeManagement.UI.ViewModels
             }
         }
 
-        private async void CreateOrUpdateEmployee(EmployeeDetail employee)
+        private async void CreateOrUpdateEmployee(EmployeeViewModel employeeVm)
         {
-            var store = new CreateOrUpdateEmployeeViewModel(employee);
+            var store = new CreateOrUpdateEmployeeViewModel(employeeVm);
 
             var latestEmployeeDetail = await ShowDialog.Handle(store);
             if (latestEmployeeDetail!=null)
@@ -80,7 +79,7 @@ namespace EmployeeManagement.UI.ViewModels
         }        
        
         public ReactiveCommand<int, Unit> DeleteEmployeeCommand { get; }
-        public ReactiveCommand<EmployeeDetail, Unit> CreateOrUpdateEmployeeCommand { get; }
-        public Interaction<CreateOrUpdateEmployeeViewModel, EmployeeDetail?> ShowDialog { get; }
+        public ReactiveCommand<EmployeeViewModel, Unit> CreateOrUpdateEmployeeCommand { get; }
+        public Interaction<CreateOrUpdateEmployeeViewModel, EmployeeViewModel?> ShowDialog { get; }
     }
 }

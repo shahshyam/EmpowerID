@@ -32,7 +32,7 @@
 				<DataGridTemplateColumn Header="Name">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<TextBlock Text="{Binding Name}"></TextBlock>
+							<TextBlock Text="{Binding FullName}"></TextBlock>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
@@ -48,7 +48,7 @@
 				<DataGridTemplateColumn Header="Date of Birth">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<TextBlock Text="{Binding DateofBirth}"></TextBlock>
+							<TextBlock Text="{Binding DateOfBirth}"></TextBlock>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
@@ -56,7 +56,7 @@
 				<DataGridTemplateColumn Header="Department">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<TextBlock Text="{Binding Department}"></TextBlock>
+							<TextBlock Text="{Binding Department, Mode=TwoWay}"></TextBlock>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>

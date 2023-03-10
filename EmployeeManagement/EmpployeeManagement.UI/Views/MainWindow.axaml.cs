@@ -1,6 +1,4 @@
-using Avalonia.Controls;
 using Avalonia.ReactiveUI;
-using EmployeeManagement.UI.Models;
 using EmployeeManagement.UI.ViewModels;
 using ReactiveUI;
 using System.Threading.Tasks;
@@ -14,12 +12,12 @@ namespace EmployeeManagement.UI.Views
             InitializeComponent();
             this.WhenActivated(d => d(ViewModel!.ShowDialog.RegisterHandler(DoShowDialogAsync)));
         }
-        private async Task DoShowDialogAsync(InteractionContext<CreateOrUpdateEmployeeViewModel, EmployeeDetail?> interaction)
+        private async Task DoShowDialogAsync(InteractionContext<CreateOrUpdateEmployeeViewModel, EmployeeViewModel?> interaction)
         {
             var dialog = new CreateOrUpdateEmployeeWindow();
             dialog.DataContext = interaction.Input;
 
-            var result = await dialog.ShowDialog<EmployeeDetail?>(this);
+            var result = await dialog.ShowDialog<EmployeeViewModel?>(this);
             interaction.SetOutput(result);
         }
     }

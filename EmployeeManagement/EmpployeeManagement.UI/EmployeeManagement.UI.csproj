@@ -34,4 +34,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EmployeeManagement.Client\EmployeeManagement.Client.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
 </Project>
