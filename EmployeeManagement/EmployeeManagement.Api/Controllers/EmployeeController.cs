@@ -24,6 +24,7 @@ namespace EmployeeManagement.Api.Controllers
         {
             return await _employeeRepository.GetAllEmployeeAsync();
         }
+
         // GET: api/Employee/2
         [HttpGet("{id}")]
         public async Task<IActionResult> GetEmployee([FromRoute] int id)
@@ -36,7 +37,7 @@ namespace EmployeeManagement.Api.Controllers
             return Ok(employee);
         }
 
-        // POST: api/Employees
+        // POST: api/Employee
         [HttpPost]
         public async Task<IActionResult> CreateEmployee([FromBody] EmployeeDto employeeDto)
         {
@@ -53,7 +54,7 @@ namespace EmployeeManagement.Api.Controllers
             return CreatedAtAction("GetEmployee", new { id = employee.Id }, employee);
         }
 
-        // DELETE: api/Employees/5
+        // DELETE: api/Employee/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEmployee([FromRoute] int id)
         {
@@ -65,7 +66,7 @@ namespace EmployeeManagement.Api.Controllers
             return NoContent();
         }
 
-        // PUT: api/Employees/2
+        // PUT: api/Employee/2
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEmployee([FromRoute] int id, [FromBody] Employee employee)
         {

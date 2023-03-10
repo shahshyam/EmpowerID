@@ -1,5 +1,6 @@
 ﻿using EmployeeManagement.Api.DbContexts;
 using EmployeeManagement.Api.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace EmployeeManagement.Api.Repository
 {
@@ -32,7 +33,7 @@ namespace EmployeeManagement.Api.Repository
 
         public async Task<IEnumerable<Employee>> GetAllEmployeeAsync()
         {
-            return _dbContext.Employees;
+            return  _dbContext.Employees;
         }
 
         public async Task<Employee> GetEmployeeAsync(int Id)

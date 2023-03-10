@@ -12,6 +12,6 @@ namespace EmployeeManagement.UI.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public string Department { get; set; }
-        public DateTime? DateofBirth { get; set; }
+        public string DateofBirth { get; set; }
     }
 }

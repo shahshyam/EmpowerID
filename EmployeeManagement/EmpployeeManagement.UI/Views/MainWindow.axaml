@@ -18,13 +18,63 @@
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-	<Grid Margin="20">
+	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="100"></RowDefinition>
+			<RowDefinition Height="120"></RowDefinition>
+			<RowDefinition Height="auto"></RowDefinition>
 			<RowDefinition></RowDefinition>
 		</Grid.RowDefinitions>
-		<TextBlock Margin="20" Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
-		<local:EmployeeListView Grid.Row="1"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></local:EmployeeListView>
+		<TextBlock Text="{Binding Title}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+		<Button Grid.Row="1" Content="Add Employee" Command="{Binding CreateOrUpdateEmployeeCommand}" CommandParameter="{x:Null}" HorizontalAlignment="Right" Width="120" Margin="10"></Button>
+		<DataGrid Grid.Row="2" HeadersVisibility="All" GridLinesVisibility="All" Items="{Binding EmployeeDetailList}" AutoGenerateColumns="False">
+			<DataGrid.Columns>
+
+				<DataGridTemplateColumn Header="Name">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<TextBlock Text="{Binding Name}"></TextBlock>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+
+				<DataGridTemplateColumn Header="Email">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<TextBlock Text="{Binding Email}"></TextBlock>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+
+				<DataGridTemplateColumn Header="Date of Birth">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<TextBlock Text="{Binding DateofBirth}"></TextBlock>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+
+				<DataGridTemplateColumn Header="Department">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<TextBlock Text="{Binding Department}"></TextBlock>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+
+				<DataGridTemplateColumn Header="Action" Width="*">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<Panel >
+								<Button Width="70"  HorizontalAlignment="Left"  Content="Edit" Margin="5"
+										Command="{Binding $parent[DataGrid].DataContext.CreateOrUpdateEmployeeCommand}" CommandParameter="{Binding}" ></Button>
+								<Button  Width="70" HorizontalAlignment="Center" Content="Delete" Margin="5"
+										 Command="{Binding $parent[DataGrid].DataContext.DeleteEmployeeCommand}" CommandParameter="{Binding Id}"> </Button>
+							</Panel>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+			</DataGrid.Columns>
+		</DataGrid>
 	</Grid>
 
 </Window>

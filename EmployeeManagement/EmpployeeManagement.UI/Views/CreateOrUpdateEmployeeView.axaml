@@ -4,5 +4,55 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="EmployeeManagement.UI.Views.CreateOrUpdateEmployeeView">
-  Welcome to Avalonia!
+	<UserControl.Styles>
+		<Style Selector="TextBlock">
+			<Setter Property="VerticalAlignment" Value="Center"></Setter>
+		</Style>
+		<Style Selector="TextBox">
+			<Setter Property="Margin" Value="5,0"/>
+		</Style>
+		<Style Selector="DockPanel">
+			<Setter Property="Margin" Value="5"/>
+		</Style>
+		<Style Selector="DatePicker">
+			<Setter Property="Margin" Value="5,2"/>
+		</Style>
+	</UserControl.Styles>
+	<Grid Margin="5">
+		<Grid.RowDefinitions>
+			<RowDefinition></RowDefinition>
+			<RowDefinition Height="45"></RowDefinition>
+			<RowDefinition Height="45"></RowDefinition>
+			<RowDefinition Height="45"></RowDefinition>
+			<RowDefinition Height="45"></RowDefinition>
+			<RowDefinition Height="50"></RowDefinition>
+			<RowDefinition Height="60"></RowDefinition>
+			<RowDefinition></RowDefinition>
+		</Grid.RowDefinitions>
+		<DockPanel Grid.Row="1">
+			<TextBlock Text="First Name:"></TextBlock>
+			<TextBox Text="{Binding FirstName}"></TextBox>
+		</DockPanel>
+		<DockPanel Grid.Row="2" >
+			<TextBlock Text="Last Name:"></TextBlock>
+			<TextBox Text="{Binding LastName}"></TextBox>
+		</DockPanel>
+		<DockPanel Grid.Row="3" >
+			<TextBlock Text="Email:"></TextBlock>
+			<TextBox Text="{Binding Email}"></TextBox>
+		</DockPanel>
+		<DockPanel Grid.Row="4">
+			<TextBlock Text="Department:"></TextBlock>
+			<TextBox Text="{Binding Department}"></TextBox>
+		</DockPanel>
+		<DockPanel Grid.Row="5" >
+			<TextBlock Text="Date of Birth:"></TextBlock>
+			<DatePicker SelectedDate="{Binding DateOfBirth}"></DatePicker>
+		</DockPanel>
+
+		<StackPanel Margin="10" Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center">
+			<Button Content="Save" Command="{Binding SaveEmployeeCommand}" HorizontalAlignment="Right" Margin="10,2" Width="70"></Button>
+			<Button Content="Cancel" Command="{Binding CloseCreateOrEditCommand}" HorizontalAlignment="Right" Width="70"></Button>
+		</StackPanel>
+	</Grid>
 </UserControl>
